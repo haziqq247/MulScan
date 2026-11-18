@@ -31,3 +31,6 @@ Thumbs.db
 # Real malware samples must NEVER be committed
 samples/*
 !samples/.gitkeep
+
+# Generated test archives (recreate with the scripts in tests/)
+tests/*.zip
