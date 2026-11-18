@@ -1,0 +1,33 @@
+# MulScan .gitignore
+
+# Output / scan reports (may contain sensitive info)
+output/
+
+# Secrets and environment files
+.env
+*.env
+secrets.*
+*.key
+*.pem
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Python build artifacts and cache
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Real malware samples must NEVER be committed
+samples/*
+!samples/.gitkeep
