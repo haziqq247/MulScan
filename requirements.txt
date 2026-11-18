@@ -1,0 +1,9 @@
+# MulScan dependencies
+# Python 3.8+ is required.
+#
+# Current modules (main.py, ethics.py) use the Python standard library only:
+#   pathlib, signal, sys
+#
+# TODO: add third-party libraries here once Analyzer A and Analyzer B
+# confirm what they use, for example:
+# pefile==2023.2.7
