@@ -33,4 +33,4 @@ samples/*
 !samples/.gitkeep
 
 # Generated test archives (recreate with the scripts in tests/)
-tests/*.zip
+*.zip
