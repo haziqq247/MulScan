@@ -1,9 +1,13 @@
 # MulScan dependencies
 # Python 3.8+ is required.
-#
-# Current modules (main.py, ethics.py) use the Python standard library only:
-#   pathlib, signal, sys
-#
-# TODO: add third-party libraries here once Analyzer A and Analyzer B
-# confirm what they use, for example:
-# pefile==2023.2.7
+# Install with: pip install -r requirements.txt
+
+# Analyzer A (EXE/DLL): PE header parsing, section entropy, imports
+pefile>=2023.2.7
+
+# Standard library modules used (no install needed):
+#   pathlib, signal, sys, re
+#   (script_analyzer.py uses only the standard library)
+
+# TODO: add any extra libraries used by Analyzer B (PDF/ZIP) and the
+# Core Engine once their code is shared.
