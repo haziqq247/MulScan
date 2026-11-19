@@ -41,6 +41,31 @@ class ScriptAnalyzerTests(unittest.TestCase):
     def test_matching_is_case_insensitive(self):
         self.assertIn("Download command", scan_text("INVOKE-WEBREQUEST http://x"))
 
+    def test_empty_script_has_no_findings(self):
+        self.assertEqual(scan_text(""), set())
+
+    def test_missing_file_returns_scan_error_with_zero_points(self):
+        findings = script_analyzer.analyze("does_not_exist.ps1")
+        self.assertEqual(findings[0]["rule"], "Scan error")
+        self.assertEqual(findings[0]["points"], 0)
+
+    def test_multiple_rules_all_reported(self):
+        rules = scan_text("Invoke-WebRequest http://x\npowershell -enc AAAA")
+        self.assertTrue({"Download command", "Encoded command"} <= rules)
+
+    def test_keyword_only_in_comment_not_flagged(self):
+        self.assertEqual(scan_text("# Invoke-WebRequest is how you download\nWrite-Host hi"), set())
+
+    def test_keyword_in_code_still_flagged_with_comment_present(self):
+        rules = scan_text("# note\nInvoke-WebRequest http://x")
+        self.assertIn("Download command", rules)
+
+    def test_python_comment_with_eval_not_flagged(self):
+        self.assertEqual(scan_text("# never use eval(x)\nprint(1)", ".py"), set())
+
+    def test_batch_rem_comment_not_flagged(self):
+        self.assertEqual(scan_text("REM certutil -urlcache x\necho hi", ".bat"), set())
+
     def test_is_script_by_extension(self):
         self.assertTrue(script_analyzer.is_script("run.ps1"))
         self.assertFalse(script_analyzer.is_script("photo.jpg"))

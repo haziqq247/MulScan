@@ -26,6 +26,11 @@ class ExeAnalyzerTests(unittest.TestCase):
         findings = self._analyze_bytes(b"MZ" + b"\x00" * 100)
         self.assertEqual(findings[0]["rule"], "Invalid PE structure")
 
+    def test_missing_file_returns_scan_error_with_zero_points(self):
+        findings = exe_analyzer.analyze("does_not_exist.exe")
+        self.assertEqual(findings[0]["rule"], "Scan error")
+        self.assertEqual(findings[0]["points"], 0)
+
     def test_findings_use_shared_format(self):
         for item in self._analyze_bytes(b"garbage"):
             self.assertEqual(set(item), {"rule", "points", "reason"})
