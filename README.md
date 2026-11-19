@@ -101,7 +101,8 @@ On start, MulScan will:
 
 **Example scan (a harmless test PDF containing PDF action keywords):**
 
-![PDF scan result](docs/screenshots/02_pdf_scan_result.png)
+<img width="1190" height="800" alt="image" src="https://github.com/user-attachments/assets/512ac24b-6009-4b01-a7b3-b41d7bc809e5" />
+
 
 If the chosen file is outside the authorized scope, MulScan warns you and requires you to type `YES` to confirm authorization; otherwise the scan is blocked.
 
