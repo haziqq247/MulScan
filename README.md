@@ -44,7 +44,7 @@ MulScan is a defensive/analysis tool, so it maps to the lifecycle stages as foll
 | Reconnaissance | File identification using magic bytes (EXE, DLL, PDF, ZIP, script) |
 | Scanning / Enumeration | Format-specific analysis: PE headers, imports, entropy, PDF objects, ZIP structure, script patterns |
 | Vulnerability Analysis | Matching indicators against suspicious-behaviour rules and risk scoring (low / medium / high) |
-| Reporting | Human-readable and structured report saved to the local `output/` folder |
+| Reporting | Human-readable and structured report saved to the local `reports/` folder |
 
 MulScan does **not** perform exploitation, persistence or data exfiltration.
 
