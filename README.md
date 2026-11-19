@@ -18,7 +18,8 @@ Under the **Computer Crimes Act 1997 (Malaysia)**, accessing computer material w
 
 On startup, MulScan displays this disclaimer and requires the user to type `I AGREE` before continuing.
 
-![Startup disclaimer and main menu](docs/screenshots/01_startup_and_menu.png)
+<img width="907" height="357" alt="image" src="https://github.com/user-attachments/assets/62ddc5c6-109c-43b1-b210-dd737c312482" />
+
 
 ---
 
