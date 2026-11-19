@@ -228,10 +228,10 @@ MulScan/
 
 | Role | Member |
 |---|---|
-| Core Engine & CLI Lead | _TODO_ |
-| Analyzer A: EXE/DLL & Scripts | _TODO_ |
-| Analyzer B: PDF & ZIP | _TODO_ |
-| Ethics, Repo & Documentation Lead | _TODO_ |
+| Core Engine & CLI Lead | MUHAMMAD RUSYAIDI BIN ABDUL RASHID (52215225041) |
+| Analyzer A: EXE/DLL & Scripts |GWE ZAMAZWE OYINTANDO (52215125180) |
+| Analyzer B: PDF & ZIP |SITI NURDAMIA AFIQAH BINTI AZREE (52215251629)|
+| Ethics, Repo & Documentation Lead |MUHAMMAD HAZIQ ISKANDAR BIN ZULZAHARI (52215225215) |
 
 ---
 
