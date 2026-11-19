@@ -33,6 +33,25 @@ RULES = [
      15, "Base64 decoding", "Decodes Base64 data at runtime"),
 ]
 
+# Full-line comment markers per file type. A suspicious word that only appears
+# in a comment is not executable code, so those lines are skipped.
+COMMENT_PREFIXES = {
+    ".ps1": ("#",), ".py": ("#",), ".sh": ("#",),
+    ".bat": ("rem ", "::"), ".cmd": ("rem ", "::"),
+    ".js": ("//",), ".vbs": ("'", "rem "),
+}
+
+
+def strip_comment_lines(text, suffix):
+    """Remove lines that are entirely a comment (text is already lowercase)."""
+    prefixes = COMMENT_PREFIXES.get(suffix)
+    if not prefixes:
+        return text
+    kept = [line for line in text.splitlines()
+            if not line.lstrip().startswith(prefixes)]
+    return "\n".join(kept)
+
+
 LONG_BLOB = re.compile(r"[A-Za-z0-9+/=]{200,}")
 
 
@@ -43,8 +62,15 @@ def is_script(path):
 def analyze(path):
     """Return a list of findings for one script file."""
     findings = []
-    with open(path, "rb") as f:
-        text = f.read(MAX_READ_BYTES).decode("utf-8", errors="ignore").lower()
+    try:
+        with open(path, "rb") as f:
+            text = f.read(MAX_READ_BYTES).decode("utf-8", errors="ignore").lower()
+    except OSError as err:
+        # A read failure is a scan problem, not a suspicious file: 0 points.
+        return [{"rule": "Scan error", "points": 0,
+                 "reason": f"Could not read file: {err.strerror}"}]
+
+    text = strip_comment_lines(text, Path(path).suffix.lower())
 
     for pattern, points, rule, reason in RULES:
         if re.search(pattern, text):

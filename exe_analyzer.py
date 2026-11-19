@@ -30,6 +30,10 @@ def analyze(path):
     except pefile.PEFormatError:
         return [{"rule": "Invalid PE structure", "points": 10,
                  "reason": "File is not a valid Windows executable"}]
+    except OSError as err:
+        # A read failure is a scan problem, not a suspicious file: 0 points.
+        return [{"rule": "Scan error", "points": 0,
+                 "reason": f"Could not read file: {err.strerror}"}]
 
     try:
         # 1. Section checks
