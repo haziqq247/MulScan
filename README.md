@@ -142,7 +142,7 @@ python main.py
 **Authorized scope**
 - Files that you own, or files for which you hold written permission to analyse
 - Files placed inside the `samples/` folder (default scope) or another folder you explicitly authorize at startup
-- Analysis is performed on your own local machine only
+- Analysis is performed on own local machine only
 
 **Time windows**
 - Use only during the course assessment and lab period (October 2026) or any period agreed in writing with the file owner
@@ -163,7 +163,7 @@ python main.py
 1. Press **Ctrl+C**: the kill switch stops MulScan immediately and safely
 2. If the terminal is unresponsive, close the terminal window
 3. Delete the `reports/` folder if sensitive results were created by mistake
-4. Report the incident to your lecturer or the file owner
+4. Report the incident to file owner
 
 ---
 
