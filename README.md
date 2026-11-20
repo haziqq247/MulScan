@@ -89,6 +89,7 @@ On start, MulScan will:
 3. Activate the kill switch (Ctrl+C)
 4. Ask you to confirm the authorized scan scope (default: `samples/`)
 5. Show the main menu
+<img width="712" height="317" alt="image" src="https://github.com/user-attachments/assets/0e793a2e-c85d-4048-8e28-0d97e3997ec8" />
 
 | Menu option | Action |
 |---|---|
