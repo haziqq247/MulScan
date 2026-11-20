@@ -31,6 +31,16 @@ RULES = [
      15, "Dynamic execution", "Executes code built at runtime"),
     (r"frombase64string|b64decode|\batob\(",
      15, "Base64 decoding", "Decodes Base64 data at runtime"),
+    (r"vssadmin\s+delete\s+shadows",
+     30, "Shadow copy deletion", "Deletes Windows backup copies (common in ransomware)"),
+    (r"net\s+user\s+\S+\s+\S+\s+/add",
+     25, "Creates user account", "Creates a new local account (possible backdoor)"),
+    (r"bash\s+-i\s+>&\s*/dev/tcp",
+     35, "Reverse shell", "Opens an interactive shell to a remote machine"),
+    (r"attrib\s+\+h",
+     10, "Hides files", "Marks files as hidden"),
+    (r"eicar-standard-antivirus-test-file",
+     50, "EICAR test signature", "Standard antivirus test string (harmless, not real malware)"),
 ]
 
 # Full-line comment markers per file type. A suspicious word that only appears

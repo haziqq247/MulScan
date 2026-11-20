@@ -15,6 +15,9 @@ SUSPICIOUS_IMPORTS = {
     "SetWindowsHookExA": 15, "SetWindowsHookExW": 15, "GetAsyncKeyState": 15,
     "URLDownloadToFileA": 20, "URLDownloadToFileW": 20,
     "IsDebuggerPresent": 10, "WinExec": 10,
+    "AdjustTokenPrivileges": 15,  # privilege escalation
+    "NtUnmapViewOfSection": 25,   # process hollowing
+    "SetThreadContext": 20,       # thread hijacking
 }
 
 ENTROPY_THRESHOLD = 7.2   # above this, a section looks packed or encrypted
