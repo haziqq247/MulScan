@@ -7,7 +7,6 @@ pefile>=2023.2.7
 
 # Standard library modules used (no install needed):
 #   pathlib, signal, sys, re, zipfile, zlib
-#   (script_analyzer.py and analyzer_b.py use only the standard library)
+#   (script_analyzer.py and pdf_zip_analyzer.py use only the standard library)
 
-# TODO: add any extra libraries used by the Core Engine once its final
-# code is shared.
+

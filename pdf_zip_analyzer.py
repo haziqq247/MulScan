@@ -6,6 +6,11 @@ from pathlib import Path
 
 
 def analyze_pdf(file_path):
+    """Scan a PDF for risky action keywords and return a list of findings.
+
+    Reads up to 10 MiB, checks the %PDF- header, then looks for /JavaScript,
+    /Launch and /OpenAction. Raises ValueError for non-PDF or oversized files.
+    """
     findings = []
 
     with open(file_path, "rb") as file:
@@ -42,6 +47,12 @@ def analyze_pdf(file_path):
 
 
 def analyze_zip(file_path):
+    """Inspect a ZIP's entry list without extracting it and return findings.
+
+    Refuses files above 10 MiB or with more than 1,000 entries. Checks total
+    size, compression ratio, executable and double extensions, disguised MZ
+    headers and nested archives.
+    """
     findings = []
 
     if Path(file_path).stat().st_size > 10 * 1024 * 1024:

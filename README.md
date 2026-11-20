@@ -44,6 +44,31 @@ On startup, MulScan displays this disclaimer and requires the user to type `I AG
 
 Findings are also grouped into threat categories (for example "Persistence", "Embedded JavaScript", "File Extension Spoofing").
 
+### Analyzer B detection rules (PDF and ZIP)
+
+Every rule adds the points below to the total risk score (capped at 100). Rules with 0 points are informational: an incomplete check is not evidence of malware.
+
+**PDF** (the file must start with `%PDF-` and be at most 10 MiB)
+
+| Rule | Points | What it looks for |
+|---|---|---|
+| `PDF_JAVASCRIPT` | 20 | The raw keyword `/JavaScript` anywhere in the file |
+| `PDF_LAUNCH` | 20 | The raw keyword `/Launch` (action that can start a program) |
+| `PDF_OPEN_ACTION` | 10 | The raw keyword `/OpenAction` (action that runs when the PDF is opened) |
+
+**ZIP** (at most 10 MiB and 1,000 entries; entries are never extracted)
+
+| Rule | Points | What it looks for |
+|---|---|---|
+| `ZIP_LARGE_TOTAL_SIZE` | 20 | Reported total uncompressed size above 100 MiB |
+| `ZIP_HIGH_COMPRESSION` | 20 | An entry above 1 MiB with a compression ratio above 100 (possible zip bomb) |
+| `ZIP_EXECUTABLE_EXTENSION` | 10 | A filename ending in `.exe`, `.dll`, `.scr`, `.com`, `.bat`, `.cmd` or `.ps1` |
+| `ZIP_DOUBLE_EXTENSION` | 20 | A document or image extension followed by an executable one, such as `invoice.pdf.exe` |
+| `ZIP_DISGUISED_MZ` | 20 | An entry starting with `MZ` (Windows executable header) but without an executable extension |
+| `ZIP_NESTED_ARCHIVE` | 10 | A filename ending in `.zip` inside the archive (its contents are not inspected) |
+| `ZIP_HEADER_CHECK_SKIPPED` | 0 | Header check skipped: encrypted entry, entry above 1 MiB, or unsupported compression |
+| `ZIP_HEADER_CHECK_FAILED` | 0 | The entry header could not be read |
+
 ---
 
 ## Attack Lifecycle Mapping
